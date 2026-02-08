@@ -36,8 +36,9 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
 
     const filteredServices = services.filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    // Don't show nav on login page
-    if (pathname === "/") {
+    // Don't show nav on login page or camera pages (immersive)
+    const hideNavPaths = ["/", "/senior/meal-log", "/senior/med-log"];
+    if (hideNavPaths.includes(pathname)) {
         return <>{children}</>;
     }
 
