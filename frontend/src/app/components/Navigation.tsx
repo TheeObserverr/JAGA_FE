@@ -44,7 +44,7 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                 className={`hidden md:flex flex-col bg-white border-r border-gray-200 transition-all duration-300 fixed h-full z-40 ${isSidebarOpen ? 'w-64' : 'w-20'}`}
             >
                 {/* Header / Hamburger */}
-                <div className="p-4 flex items-center justify-between border-b border-gray-100 h-16">
+                <div className={`p-4 flex items-center h-16 border-b border-gray-100 ${isSidebarOpen ? 'justify-between' : 'justify-center'}`}>
                     {isSidebarOpen && <span className="font-black text-2xl text-primary tracking-tight">JAGA</span>}
                     <button 
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
