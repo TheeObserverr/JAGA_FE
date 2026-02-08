@@ -54,8 +54,11 @@ export default function SeniorMedsLogPage() {
             </div>
         ) : (
              <div className="min-h-screen bg-black text-white flex flex-col">
-                 <div className="absolute top-4 left-4 z-10">
-                    <button onClick={() => setStep('reminder')} className="text-white font-bold text-lg">← Back</button>
+                 <div className="absolute top-4 left-4 z-10 w-full pr-8">
+                    <div className="flex justify-between items-center">
+                        <button onClick={() => setStep('reminder')} className="text-white font-bold text-lg">← Back</button>
+                        <span className="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Medication Log</span>
+                    </div>
                 </div>
                 {step === 'camera' ? (
                      <>

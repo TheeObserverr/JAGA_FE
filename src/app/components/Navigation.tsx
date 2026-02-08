@@ -146,7 +146,31 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsServicesOpen(false)}></div>
                     
                     {/* Drawer Content */}
-                    <div className="relative mt-auto md:mt-0 md:ml-auto md:w-96 h-[85vh] md:h-full bg-secondary rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom md:slide-in-from-right duration-300">
+                    <div 
+                        className="relative mt-auto md:mt-0 md:ml-auto md:w-96 h-[85vh] md:h-full bg-secondary rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom md:slide-in-from-right duration-300 touch-none"
+                        onTouchStart={(e) => {
+                            const touch = e.touches[0];
+                            const currentY = touch.clientY;
+                            e.currentTarget.setAttribute("data-start-y", currentY.toString());
+                        }}
+                        onTouchMove={(e) => {
+                            const touch = e.touches[0];
+                            const startY = parseFloat(e.currentTarget.getAttribute("data-start-y") || "0");
+                            const diff = touch.clientY - startY;
+                            if (diff > 0) {
+                                e.currentTarget.style.transform = `translateY(${diff}px)`;
+                            }
+                        }}
+                        onTouchEnd={(e) => {
+                            const startY = parseFloat(e.currentTarget.getAttribute("data-start-y") || "0");
+                            const touch = e.changedTouches[0];
+                            const diff = touch.clientY - startY;
+                            e.currentTarget.style.transform = ""; // Reset
+                            if (diff > 100) { // Threshold to close
+                                setIsServicesOpen(false);
+                            }
+                        }}
+                    >
                         {/* Drag Handle (Mobile) */}
                         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 mb-1 md:hidden"></div>
 

@@ -25,8 +25,11 @@ export default function SeniorMealLogPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="absolute top-4 left-4 z-10">
-        <PageHeader title="" /> 
+      <div className="absolute top-4 left-4 z-10 w-full pr-8">
+        <div className="flex justify-between items-center">
+             <PageHeader title="" /> 
+             <span className="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Jiak Ba Buay (Meal Log)</span>
+        </div>
       </div>
 
       {step === 'camera' ? (

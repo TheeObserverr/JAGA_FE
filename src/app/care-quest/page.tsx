@@ -59,7 +59,7 @@ export default function CareQuestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary p-6">
+    <div className="min-h-screen bg-secondary p-4 md:p-6 overflow-x-hidden">
       <div className="max-w-3xl mx-auto">
         <PageHeader title="Family Care-Quest" />
         

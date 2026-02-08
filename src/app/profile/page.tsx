@@ -6,16 +6,17 @@ import { useRouter } from "next/navigation";
 export default function ProfilePage() {
   const router = useRouter();
   /* eslint-disable react-hooks/exhaustive-deps */
-  const [user, setUser] = useState({ name: "", email: "", role: "", phone: "" });
+  /* eslint-disable react-hooks/exhaustive-deps */
+  const [user, setUser] = useState({ name: "", email: "", role: "", phone: "", notifications: true, largeText: false });
 
   useEffect(() => {
     const type = localStorage.getItem("userType");
     
     if (type?.toLowerCase() === "uncle_tan" || type?.toLowerCase() === "uncle tan") {
-        setUser({ name: "Tan Ah Hock", email: "ahhock88@example.com", role: "Senior", phone: "+65 6789 1234" });
+        setUser({ name: "Tan Ah Hock", email: "ahhock88@example.com", role: "Senior", phone: "+65 6789 1234", notifications: true, largeText: false });
     } else {
         // Default to Sarah
-        setUser({ name: "Sarah Tan", email: "sarah.tan@example.com", role: "Caregiver", phone: "+65 9123 4567" });
+        setUser({ name: "Sarah Tan", email: "sarah.tan@example.com", role: "Caregiver", phone: "+65 9123 4567", notifications: true, largeText: false });
     }
   }, []);
 
@@ -64,15 +65,29 @@ export default function ProfilePage() {
             <div className="space-y-4">
                  <div className="flex justify-between items-center">
                     <span className="text-gray-700">Notifications</span>
-                    <div className="w-10 h-6 bg-green-500 rounded-full relative cursor-pointer">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
-                    </div>
+                    <button 
+                        onClick={() => {
+                            const newState = !user.notifications;
+                            setUser({...user, notifications: newState});
+                            alert(`Notifications turned ${newState ? 'ON' : 'OFF'}`);
+                        }}
+                        className={`w-10 h-6 rounded-full relative transition-colors ${user.notifications ? 'bg-green-500' : 'bg-gray-300'}`}
+                    >
+                        <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all ${user.notifications ? 'right-1' : 'left-1'}`}></div>
+                    </button>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-700">Large Text Mode</span>
-                    <div className="w-10 h-6 bg-gray-200 rounded-full relative cursor-pointer">
-                        <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
-                    </div>
+                    <button 
+                        onClick={() => {
+                            const newState = !user.largeText;
+                            setUser({...user, largeText: newState});
+                            alert(`Large Text Mode turned ${newState ? 'ON' : 'OFF'}`);
+                        }}
+                        className={`w-10 h-6 rounded-full relative transition-colors ${user.largeText ? 'bg-green-500' : 'bg-gray-300'}`}
+                    >
+                         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all ${user.largeText ? 'right-1' : 'left-1'}`}></div>
+                    </button>
                 </div>
             </div>
         </div>

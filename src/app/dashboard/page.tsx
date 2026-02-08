@@ -182,10 +182,16 @@ function SarahDashboard({ data }: { data: DashboardData }) {
                 <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100">
                     <h3 className="font-bold text-purple-900 mb-2">Quick Actions</h3>
                     <div className="grid grid-cols-2 gap-2">
-                        <button className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1">
+                        <button 
+                            onClick={() => alert("Calling Uncle Tan...")}
+                            className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1"
+                        >
                             📞 Call
                         </button>
-                        <button className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1">
+                        <button 
+                            onClick={() => alert("Sending ❤️ to Uncle Tan!")}
+                            className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1"
+                        >
                             ❤️ Love
                         </button>
                     </div>
