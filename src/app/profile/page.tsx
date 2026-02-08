@@ -5,13 +5,17 @@ import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [user, setUser] = useState({ name: "Sarah Tan", email: "sarah.tan@example.com", role: "Caregiver", phone: "+65 9123 4567" });
+  /* eslint-disable react-hooks/exhaustive-deps */
+  const [user, setUser] = useState({ name: "", email: "", role: "", phone: "" });
 
   useEffect(() => {
-    // In a real app, fetch from API
     const type = localStorage.getItem("userType");
-    if (type?.toLowerCase() === "uncle tan") {
+    
+    if (type?.toLowerCase() === "uncle_tan" || type?.toLowerCase() === "uncle tan") {
         setUser({ name: "Tan Ah Hock", email: "ahhock88@example.com", role: "Senior", phone: "+65 6789 1234" });
+    } else {
+        // Default to Sarah
+        setUser({ name: "Sarah Tan", email: "sarah.tan@example.com", role: "Caregiver", phone: "+65 9123 4567" });
     }
   }, []);
 
