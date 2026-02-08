@@ -231,20 +231,71 @@ function SarahDashboard({ data }: { data: DashboardData }) {
 
             </div>
 
-            {/* Column 3: Quick Actions & Family */}
-             <div className="space-y-6">
-                <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100 h-full">
+            {/* Column 3: Social & Lifestyle */}
+            <div className="space-y-6">
+                {/* Kampung Leaderboard Widget */}
+                <Link href="/senior/leaderboard" className="block transform transition hover:scale-[1.02]">
+                    <div className="bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl shadow-sm p-4 text-white relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-20 text-6xl">🏆</div>
+                        <h3 className="font-bold text-lg mb-1">Kampung Leaderboard</h3>
+                        <p className="text-yellow-100 text-sm mb-3">Uncle Tan is doing great!</p>
+                        <div className="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                            <div className="flex justify-between items-center mb-1">
+                                <span className="font-bold text-sm">Rank #2</span>
+                                <span className="text-xs">1,250 Pts</span>
+                            </div>
+                            <div className="w-full bg-black/20 h-1.5 rounded-full overflow-hidden">
+                                <div className="bg-white h-full w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+
+                {/* Quick Actions */}
+                <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100">
                     <h3 className="font-bold text-purple-900 mb-2">Quick Actions</h3>
-                    <div className="grid gap-2">
-                         <button className="bg-white p-3 rounded-lg text-sm font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-2">
-                            📞 Call Uncle Tan
+                    <div className="grid grid-cols-2 gap-2">
+                        <button className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1">
+                            📞 Call
                         </button>
-                         <button className="bg-white p-3 rounded-lg text-sm font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-2">
-                            ❤️ Send Love
+                        <button className="bg-white p-2 rounded-lg text-xs font-bold text-purple-700 shadow-sm hover:bg-purple-50 transition flex items-center justify-center gap-1">
+                            ❤️ Love
                         </button>
                     </div>
                 </div>
-             </div>
+
+                {/* Family Doctor */}
+                <Link href="/family-doctor" className="block transform transition hover:scale-[1.02]">
+                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-lg">👨‍⚕️</span>
+                            <p className="text-xs text-blue-700 font-bold uppercase">Next Appointment</p>
+                        </div>
+                        {data.appointments && data.appointments[0] ? (
+                            <div>
+                                <p className="font-bold text-blue-900">{data.appointments[0].doctor}</p>
+                                <p className="text-xs text-blue-600">20 Feb • {data.appointments[0].location}</p>
+                            </div>
+                        ) : <p className="text-sm text-blue-800">No upcoming appointments</p>}
+                    </div>
+                </Link>
+
+                {/* Tingkat & Bonding Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                    <Link href="/tingkat" className="block transform transition hover:scale-[1.02]">
+                        <div className="bg-orange-50 p-3 rounded-xl border border-orange-100 h-full">
+                            <span className="text-lg block mb-1">🍱</span>
+                            <p className="text-xs text-orange-700 font-bold uppercase leading-tight">Tingkat<br/>Delivery</p>
+                        </div>
+                    </Link>
+                    <Link href="/jaga-together" className="block transform transition hover:scale-[1.02]">
+                        <div className="bg-pink-50 p-3 rounded-xl border border-pink-100 h-full">
+                            <span className="text-lg block mb-1">❤️</span>
+                            <p className="text-xs text-pink-700 font-bold uppercase leading-tight">Family<br/>Bonding</p>
+                        </div>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }
