@@ -59,13 +59,27 @@ export default function CareQuestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary p-4 md:p-6 overflow-x-hidden">
+    <div className="min-h-screen bg-secondary p-4 md:p-6 pb-32 overflow-x-hidden">
       <div className="max-w-3xl mx-auto">
         <PageHeader title="Family Care-Quest" />
         
         <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Interactive Calendar Widget */}
-            <div className="bg-white rounded-2xl shadow-sm p-4 flex justify-center">
+            <div className="bg-white rounded-2xl shadow-sm p-4 flex justify-center w-full overflow-hidden">
+                <style>{`
+                    .rdp {
+                        --rdp-cell-size: 45px; /* Larger touch targets by default */
+                        --rdp-accent-color: #7c3aed;
+                        --rdp-background-color: #f3f4f6;
+                        margin: 0 !important;
+                    }
+                    @media (max-width: 380px) {
+                        .rdp {
+                            --rdp-cell-size: 35px !important; /* Scale down for narrow screens */
+                            font-size: 0.875rem;
+                        }
+                    }
+                `}</style>
                 <DayPicker
                     mode="single"
                     selected={selectedDate}
@@ -73,6 +87,7 @@ export default function CareQuestPage() {
                     modifiers={modifiers}
                     modifiersStyles={modifiersStyles}
                     footer={selectedDate ? `Selected: ${format(selectedDate, 'PP')}` : "Pick a day."}
+                    className="rdp-root"
                 />
             </div>
 
@@ -81,7 +96,7 @@ export default function CareQuestPage() {
                  <h3 className="font-bold text-gray-800 mb-4 border-b pb-2">
                     Agenda for {selectedDate ? format(selectedDate, 'PP') : '...'}
                  </h3>
-                 <div className="space-y-3 flex-1 overflow-y-auto max-h-60 custom-scrollbar">
+                 <div className="space-y-3 flex-1 overflow-y-auto max-h-[60vh] custom-scrollbar">
                     {selectedTasks.length > 0 ? (
                         selectedTasks.map(task => (
                              <div 

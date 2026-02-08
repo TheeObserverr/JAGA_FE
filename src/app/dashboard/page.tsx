@@ -121,7 +121,7 @@ function SarahDashboard({ data }: { data: DashboardData }) {
                             </div>
                         </div>
                     </Link>
-                    <Link href="/jiak-ba-buay" className="block transform transition hover:scale-[1.02]">
+                    <Link href="/caregiver/meds" className="block transform transition hover:scale-[1.02]">
                         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 h-full text-center">
                             <p className="text-xs text-gray-500 mb-1">Meds Tracker</p>
                             <p className="text-2xl font-bold text-gray-800">1/2</p>
