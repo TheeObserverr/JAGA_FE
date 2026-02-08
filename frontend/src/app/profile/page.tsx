@@ -74,6 +74,18 @@ export default function ProfilePage() {
         </div>
 
         <button 
+            onClick={() => {
+                const current = localStorage.getItem('userType');
+                const next = current?.toLowerCase() === 'sarah' ? 'Uncle Tan' : 'Sarah';
+                localStorage.setItem('userType', next);
+                window.location.href = '/dashboard';
+            }}
+            className="w-full bg-primary/10 text-primary font-bold py-4 rounded-2xl hover:bg-primary/20 transition mb-4"
+        >
+            Switch User 🔄
+        </button>
+
+        <button 
             onClick={() => router.push('/')}
             className="w-full bg-red-50 text-red-600 font-bold py-4 rounded-2xl hover:bg-red-100 transition mb-8"
         >

@@ -23,16 +23,6 @@ export default function Dashboard() {
     const [userType, setUserType] = useState<string | null>(null);
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     useEffect(() => {
         const type = localStorage.getItem("userType");
@@ -68,17 +58,7 @@ export default function Dashboard() {
 
     }, [router]);
 
-    const handleSwitchUser = () => {
-        const newUser = userType === 'sarah' ? 'Uncle Tan' : 'Sarah';
-        localStorage.setItem('userType', newUser);
-        // Reload to refresh views
-        window.location.reload();
-    };
 
-    const handleLogout = () => {
-        localStorage.clear();
-        router.push('/');
-    };
 
     if (loading) return <div className="min-h-screen flex items-center justify-center bg-secondary"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>;
 
@@ -87,59 +67,6 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen bg-secondary pb-20">
             {/* Header */}
-            <header className={`bg-white shadow-sm px-6 sticky top-0 z-30 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md bg-white/95 backdrop-blur-sm' : 'py-5'}`}>
-                <div className="flex justify-between items-center max-w-7xl mx-auto">
-                    <h1 className={`font-bold text-primary tracking-tight transition-all ${isScrolled ? 'text-lg' : 'text-2xl'}`}>JAGA</h1>
-                    
-                    {/* User Menu */}
-                    <div className="relative">
-                        <button 
-                            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                            className={`flex items-center gap-2 hover:bg-gray-50 rounded-lg transition-all ${isScrolled ? 'p-1' : 'p-2'}`}
-                        >
-                            <span className={`font-bold text-gray-700 hidden md:block transition-all ${isScrolled ? 'text-xs' : 'text-sm'}`}>{data.user.name}</span>
-                            <div className={`rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary border border-primary/20 transition-all ${isScrolled ? 'w-8 h-8 text-[10px]' : 'w-10 h-10 text-sm'}`}>
-                                {data.user.name.charAt(0)}
-                            </div>
-                        </button>
-
-                        {/* Dropdown */}
-                        {isUserMenuOpen && (
-                            <>
-                                <div 
-                                    className="fixed inset-0 z-10" 
-                                    onClick={() => setIsUserMenuOpen(false)}
-                                ></div>
-                                <div className="absolute right-0 top-14 w-56 bg-white rounded-xl shadow-xl border border-gray-100 p-2 z-20 animate-in slide-in-from-top-2 duration-200">
-                                    <div className="px-3 py-2 border-b border-gray-50 mb-1">
-                                        <p className="text-sm font-bold text-gray-900">{data.user.name}</p>
-                                        <p className="text-xs text-gray-500">{data.user.role}</p>
-                                    </div>
-                                    <Link 
-                                        href="/profile" 
-                                        className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
-                                    >
-                                        👤 User Profile
-                                    </Link>
-                                    <button 
-                                        onClick={handleSwitchUser}
-                                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg text-left"
-                                    >
-                                        🔄 Switch User
-                                    </button>
-                                    <div className="h-px bg-gray-50 my-1"></div>
-                                    <button 
-                                        onClick={handleLogout}
-                                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg text-left font-medium"
-                                    >
-                                        🚪 Log Out
-                                    </button>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </header>
 
             <main className="max-w-7xl mx-auto p-4 space-y-6">
                 {userType === "sarah" ? <SarahDashboard data={data} /> : <UncleTanDashboard data={data} />}
