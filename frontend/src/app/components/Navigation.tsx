@@ -50,7 +50,9 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         className="p-2 hover:bg-gray-100 rounded-lg text-gray-500"
                     >
-                        <MenuIcon />
+                        <div className="w-6 h-6">
+                            <MenuIcon />
+                        </div>
                     </button>
                 </div>
 
