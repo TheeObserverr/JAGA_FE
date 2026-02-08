@@ -57,9 +57,9 @@ export default function CaregiverMedsPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
+        <div className="min-h-screen bg-gray-50 pb-32">
             {/* ... Header ... */}
-            <div className="bg-white p-6 pb-4 shadow-sm border-b border-gray-100 sticky top-0 z-10">
+            <div className="bg-white p-6 pb-4 shadow-sm border-b border-gray-100 sticky top-0 z-30">
                 <div className="flex justify-between items-center mb-4">
                     <Link href="/dashboard" className="text-gray-500 font-bold">← Dashboard</Link>
                     <button 
@@ -156,10 +156,10 @@ export default function CaregiverMedsPage() {
 
             {/* ADD MED MODAL */}
             {showAddModal && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-                    <div className="bg-white rounded-3xl w-full max-w-sm p-6 animate-in zoom-in-95 duration-200">
-                        <h2 className="text-2xl font-black text-gray-900 mb-4">Add Medication</h2>
-                        <form onSubmit={handleAddMed} className="space-y-4">
+                <div className="fixed inset-0 bg-black/60 z-[100] flex items-end md:items-center justify-center sm:p-4 backdrop-blur-sm">
+                    <div className="bg-white rounded-t-3xl md:rounded-3xl w-full max-w-sm p-6 animate-in slide-in-from-bottom duration-300 max-h-[85vh] overflow-y-auto">
+                        <h2 className="text-2xl font-black text-gray-900 mb-4 sticky top-0 bg-white z-10">Add Medication</h2>
+                        <form onSubmit={handleAddMed} className="space-y-4 pb-10">
                             <div>
                                 <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Medication Name</label>
                                 <input name="medName" required placeholder="e.g. Lisinopril" className="w-full bg-gray-50 rounded-xl p-3 font-bold text-gray-900 outline-none focus:ring-2 focus:ring-primary" />
@@ -193,8 +193,11 @@ export default function CaregiverMedsPage() {
 
             {/* MED DETAIL MODAL */}
             {selectedMed && (
-                <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center sm:p-4 backdrop-blur-sm" onClick={() => setSelectedMed(null)}>
-                    <div className="bg-white rounded-t-3xl md:rounded-3xl w-full max-w-sm p-6 animate-in slide-in-from-bottom duration-300" onClick={e => e.stopPropagation()}>
+                <div className="fixed inset-0 bg-black/60 z-[100] flex items-end md:items-center justify-center sm:p-4 backdrop-blur-sm" onClick={() => setSelectedMed(null)}>
+                    <div 
+                        className="bg-white rounded-t-3xl md:rounded-3xl w-full max-w-sm p-6 animate-in slide-in-from-bottom duration-300 max-h-[85vh] overflow-y-auto" 
+                        onClick={e => e.stopPropagation()}
+                    >
                         <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 md:hidden"></div>
                         
                         <div className="flex justify-between items-start mb-6">
@@ -210,7 +213,7 @@ export default function CaregiverMedsPage() {
                             <button onClick={() => setSelectedMed(null)} className="p-2 bg-gray-100 rounded-full text-gray-500 hidden md:block">✕</button>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 pb-10">
                             <div className="bg-gray-50 p-4 rounded-xl">
                                 <h3 className="text-xs font-bold text-gray-500 uppercase mb-1">Usage Information</h3>
                                 <p className="text-gray-800 font-medium leading-relaxed">{selectedMed.usage}</p>
