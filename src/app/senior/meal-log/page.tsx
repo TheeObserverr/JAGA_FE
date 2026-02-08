@@ -24,7 +24,7 @@ export default function SeniorMealLogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="h-[100dvh] overflow-hidden bg-black text-white flex flex-col">
       <div className="absolute top-4 left-4 z-10 w-full pr-8">
         <div className="flex justify-between items-center">
              <PageHeader title="" /> 

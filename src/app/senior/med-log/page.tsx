@@ -25,7 +25,7 @@ export default function SeniorMedsLogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary flex flex-col">
+    <div className="h-[100dvh] bg-secondary flex flex-col overflow-hidden">
         {step === 'reminder' ? (
             <div className="p-6 flex-1 flex flex-col">
                  <PageHeader title="My Medication" />
@@ -53,7 +53,7 @@ export default function SeniorMedsLogPage() {
                 </button>
             </div>
         ) : (
-             <div className="min-h-screen bg-black text-white flex flex-col">
+             <div className="h-full bg-black text-white flex flex-col">
                  <div className="absolute top-4 left-4 z-10 w-full pr-8">
                     <div className="flex justify-between items-center">
                         <button onClick={() => setStep('reminder')} className="text-white font-bold text-lg">← Back</button>
