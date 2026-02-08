@@ -36,6 +36,11 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
 
     const filteredServices = services.filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
+    // Don't show nav on login page
+    if (pathname === "/") {
+        return <>{children}</>;
+    }
+
     return (
         <div className="min-h-screen bg-secondary flex">
             
