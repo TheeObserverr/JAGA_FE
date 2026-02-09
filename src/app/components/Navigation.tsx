@@ -10,13 +10,25 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
     const router = useRouter();
     const { isChatOpen, toggleChat } = useChat();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Desktop sidebar state
+    const [userProfile, setUserProfile] = useState({ name: "Uncle Tan", role: "Senior", initial: "T" });
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+
+    useEffect(() => {
+        // Simple client-side check for demo persona
+        const type = localStorage.getItem("userType");
+        if (type === "sarah") {
+            setUserProfile({ name: "Sarah", role: "Care Giver", initial: "S" });
+        } else {
+            setUserProfile({ name: "Uncle Tan", role: "Senior", initial: "T" });
+        }
+    }, []);
 
     // Close services drawer on route change
     useEffect(() => {
         setIsServicesOpen(false);
     }, [pathname]);
+
 
     const navItems = [
         { name: "Home", href: "/dashboard", icon: <HomeIcon /> },
@@ -93,12 +105,12 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                 <div className="p-4 border-t border-gray-100">
                      <Link href="/profile" className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                            U
+                            {userProfile.initial}
                         </div>
                         {isSidebarOpen && (
                             <div className="overflow-hidden">
-                                <p className="text-sm font-bold text-gray-900 truncate">Uncle Tan</p>
-                                <p className="text-xs text-gray-500 truncate">Senior</p>
+                                <p className="text-sm font-bold text-gray-900 truncate">{userProfile.name}</p>
+                                <p className="text-xs text-gray-500 truncate">{userProfile.role}</p>
                             </div>
                         )}
                     </Link>
