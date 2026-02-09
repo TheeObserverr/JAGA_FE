@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useChat } from "../context/ChatContext";
 
 export default function Navigation({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const router = useRouter();
+    const { isChatOpen, toggleChat } = useChat();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Desktop sidebar state
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -138,6 +140,15 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                         </button>
                      )
                 ))}
+                
+                {/* Chat Bot Toggle (Mobile Only) */}
+                <button 
+                    onClick={toggleChat}
+                    className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${isChatOpen ? 'text-primary bg-primary/10' : 'text-gray-400'}`}
+                >
+                    <span className="w-6 h-6 text-xl">🐶</span>
+                    <span className="text-[10px] font-bold">Chat</span>
+                </button>
             </nav>
 
             {/* --- SERVICES DRAWER (APP DRAWER STYLE) --- */}

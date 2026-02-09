@@ -186,7 +186,7 @@ export default function CareQuestPage() {
                     <input 
                         type="text" 
                         required
-                        className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                        className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-gray-900"
                         placeholder="e.g., Buy Milk"
                         value={newTask.title}
                         onChange={e => setNewTask({...newTask, title: e.target.value})}
@@ -195,7 +195,7 @@ export default function CareQuestPage() {
                 <div>
                     <label className="block text-sm font-bold text-gray-700 mb-1">Assignee</label>
                     <select 
-                        className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                        className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none text-gray-900"
                         value={newTask.assignee}
                         onChange={e => setNewTask({...newTask, assignee: e.target.value})}
                     >
