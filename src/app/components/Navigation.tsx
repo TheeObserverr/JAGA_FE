@@ -34,8 +34,8 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
         { name: "Home", href: "/dashboard", icon: <HomeIcon /> },
         { name: "Care Quest", href: "/care-quest", icon: <CalendarIcon /> },
         { name: "Services", action: () => setIsServicesOpen(true), isActive: isServicesOpen, icon: <GridIcon /> },
-        { name: "Profile", href: "/profile", icon: <UserIcon /> },
         { name: "Chat", action: toggleChat, isActive: isChatOpen, icon: <ChatIcon />, mobileOnly: true, activeClass: "text-gray-900 bg-gray-100" },
+        { name: "Profile", href: "/profile", icon: <UserIcon /> },
     ];
 
     const services = [
