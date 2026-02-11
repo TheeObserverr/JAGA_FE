@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
   // --- Mock Data Mocking ---
   const commonData = {
-      bonding: { title: "Botanic Gardens Walk", date: "2024-02-15", status: "Upcoming" },
+      bonding: { title: "Botanic Gardens Walk", date: "2026-02-15", status: "Upcoming" },
       nutrition: { 
           calories: 1850, 
           protein: 75, 
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
           { name: "Atorvastatin", time: "08:00 PM", taken: false }
       ],
       appointments: [
-          { doctor: "Dr. Lim", location: "Toa Payoh Polyclinic", date: "2024-02-20 10:00 AM", summary: "Stable BP, maintain meds." }
+          { doctor: "Dr. Lim", location: "Toa Payoh Polyclinic", date: "2026-02-20 10:00 AM", summary: "Stable BP, maintain meds." }
       ],
       promos: [
           { title: "Zoo Family Package", description: "50% off for families", code: "ZOO50" }

@@ -131,7 +131,7 @@ export default function CareQuestPage() {
             <div>
                 <p className="text-purple-600 font-bold uppercase text-xs tracking-wider mb-1">Bonding Commitment</p>
                 <h2 className="text-xl font-bold text-gray-900">Botanic Gardens Walk</h2>
-                <p className="text-gray-600 text-sm mt-1">Feb 15, 2024 • 9:00 AM</p>
+                <p className="text-gray-600 text-sm mt-1">Feb 15, 2026 • 9:00 AM</p>
             </div>
             <div className="text-center bg-white p-3 rounded-lg shadow-sm">
                 <span className="block text-2xl font-bold text-purple-600">5</span>
