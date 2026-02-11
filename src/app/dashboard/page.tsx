@@ -82,9 +82,9 @@ import Link from "next/link";
 
 function SarahDashboard({ data }: { data: DashboardData }) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {/* Column 1: Senior Status & Monitoring */}
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6 h-full">
                 {/* Senior Status Card (Hero) */}
                 <Link href="/jaga-link" className="block transform transition hover:scale-[1.02]">
                     <div className="bg-white rounded-2xl shadow-sm p-4 border border-gray-100 relative overflow-hidden h-full">
@@ -110,9 +110,9 @@ function SarahDashboard({ data }: { data: DashboardData }) {
                     </div>
                 </Link>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <Link href="/jiak-ba-buay" className="block transform transition hover:scale-[1.02]">
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 h-full text-center">
+                <div className="grid grid-cols-2 gap-4 flex-1">
+                    <Link href="/jiak-ba-buay" className="block transform transition hover:scale-[1.02] h-full">
+                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 h-full text-center flex flex-col justify-center">
                             <p className="text-xs text-gray-500 mb-1">Jiak Ba Buay</p>
                             <p className="text-2xl font-bold text-primary">{data.nutrition?.calories ?? 0}</p>
                             <p className="text-xs text-gray-400 mb-2">kcal today</p>
@@ -121,8 +121,8 @@ function SarahDashboard({ data }: { data: DashboardData }) {
                             </div>
                         </div>
                     </Link>
-                    <Link href="/caregiver/meds" className="block transform transition hover:scale-[1.02]">
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 h-full text-center">
+                    <Link href="/caregiver/meds" className="block transform transition hover:scale-[1.02] h-full">
+                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 h-full text-center flex flex-col justify-center">
                             <p className="text-xs text-gray-500 mb-1">Meds Tracker</p>
                             <p className="text-2xl font-bold text-gray-800">1/2</p>
                             <p className="text-[10px] text-red-500 font-medium">Next: 8 PM</p>
@@ -132,15 +132,31 @@ function SarahDashboard({ data }: { data: DashboardData }) {
             </div>
 
             {/* Column 2: Tasks & Appointments */}
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6 h-full">
+                {/* Family Doctor (Moved from Col 3) */}
+                <Link href="/family-doctor" className="block transform transition hover:scale-[1.02]">
+                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-lg">👨‍⚕️</span>
+                            <p className="text-xs text-blue-700 font-bold uppercase">Next Appointment</p>
+                        </div>
+                        {data.appointments && data.appointments[0] ? (
+                            <div>
+                                <p className="font-bold text-blue-900">{data.appointments[0].doctor}</p>
+                                <p className="text-xs text-blue-600">20 Feb • {data.appointments[0].location}</p>
+                            </div>
+                        ) : <p className="text-sm text-blue-800">No upcoming appointments</p>}
+                    </div>
+                </Link>
+
                 {/* Care-Quest Tasks */}
-                <Link href="/care-quest" className="block transform transition hover:scale-[1.02] h-full">
-                    <div className="bg-white rounded-2xl shadow-sm p-4 h-full border border-gray-100">
+                <Link href="/care-quest" className="flex-1 transform transition hover:scale-[1.02] min-h-[200px]">
+                    <div className="bg-white rounded-2xl shadow-sm p-4 h-full border border-gray-100 flex flex-col">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-bold text-lg text-gray-800">Family Care-Quest</h3>
                             <span className="text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded">View Board →</span>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-3 flex-1 overflow-y-auto">
                             {data.tasks.map((task: any, i: number) => (
                                 <div key={i} className="flex items-center gap-3 p-3 border border-gray-100 rounded-lg">
                                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${task.completed ? 'bg-primary border-primary' : 'border-gray-300'}`}>
@@ -159,20 +175,22 @@ function SarahDashboard({ data }: { data: DashboardData }) {
             </div>
 
             {/* Column 3: Social & Lifestyle */}
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6 h-full">
                 {/* Kampung Leaderboard Widget */}
                 <Link href="/senior/leaderboard" className="block transform transition hover:scale-[1.02]">
-                    <div className="bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl shadow-sm p-4 text-white relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 opacity-20 text-6xl">🏆</div>
-                        <h3 className="font-bold text-lg mb-1">Kampung Leaderboard</h3>
-                        <p className="text-yellow-100 text-sm mb-3">Uncle Tan is doing great!</p>
-                        <div className="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="font-bold text-sm">Rank #2</span>
-                                <span className="text-xs">1,250 Pts</span>
-                            </div>
-                            <div className="w-full bg-black/20 h-1.5 rounded-full overflow-hidden">
-                                <div className="bg-white h-full w-3/4"></div>
+                    <div className="bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl shadow-sm p-4 text-white relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-20 text-6xl group-hover:scale-110 transition-transform duration-500">🏆</div>
+                        <div className="relative z-10">
+                            <h3 className="font-bold text-lg mb-1">Kampung Leaderboard</h3>
+                            <p className="text-yellow-100 text-sm mb-3">Uncle Tan is doing great!</p>
+                            <div className="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="font-bold text-sm">Rank #2</span>
+                                    <span className="text-xs">1,250 Pts</span>
+                                </div>
+                                <div className="w-full bg-black/20 h-1.5 rounded-full overflow-hidden">
+                                    <div className="bg-white h-full w-3/4"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -197,21 +215,7 @@ function SarahDashboard({ data }: { data: DashboardData }) {
                     </div>
                 </div>
 
-                {/* Family Doctor */}
-                <Link href="/family-doctor" className="block transform transition hover:scale-[1.02]">
-                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="text-lg">👨‍⚕️</span>
-                            <p className="text-xs text-blue-700 font-bold uppercase">Next Appointment</p>
-                        </div>
-                        {data.appointments && data.appointments[0] ? (
-                            <div>
-                                <p className="font-bold text-blue-900">{data.appointments[0].doctor}</p>
-                                <p className="text-xs text-blue-600">20 Feb • {data.appointments[0].location}</p>
-                            </div>
-                        ) : <p className="text-sm text-blue-800">No upcoming appointments</p>}
-                    </div>
-                </Link>
+
 
                 {/* Tingkat & Bonding Grid */}
                 <div className="grid grid-cols-2 gap-4">
@@ -234,9 +238,10 @@ function SarahDashboard({ data }: { data: DashboardData }) {
 }
 
 function UncleTanDashboard({ data }: { data: DashboardData }) {
+    const [isSharing, setIsSharing] = useState(true);
+
     const handleAction = (type: string) => {
         alert("Reported: " + type);
-        // In real app, call backend
     };
 
     return (
@@ -248,42 +253,44 @@ function UncleTanDashboard({ data }: { data: DashboardData }) {
             </div>
 
             {/* Dignity Toggle / Safety Status */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 text-center border-b-8 border-green-500">
-                <div className="w-24 h-24 bg-green-100 rounded-full mx-auto flex items-center justify-center mb-4">
-                     <Link href="/jaga-link"><span className="text-4xl">👍</span></Link>
+            <div className={`rounded-3xl shadow-lg p-6 md:p-8 text-center border-b-8 transition-colors ${isSharing ? 'bg-white border-green-500' : 'bg-gray-100 border-gray-400'}`}>
+                <div className={`w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-4 transition-colors ${isSharing ? 'bg-green-100' : 'bg-gray-200'}`}>
+                     <Link href="/jaga-link"><span className="text-4xl">{isSharing ? '👍' : '🛡️'}</span></Link>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">I am Safe</h3>
-                <p className="text-gray-500">Sharing location with Sarah</p>
-                <Link href="/jaga-link" className="inline-block mt-6 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold text-sm touch-manipulation">
-                    Turn Off (Dignity Toggle)
-                </Link>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">{isSharing ? 'I am Safe' : 'Not Sharing'}</h3>
+                <p className="text-gray-500">{isSharing ? 'Sharing location with Sarah' : 'Location Not Shared'}</p>
+                <button 
+                    onClick={() => setIsSharing(!isSharing)}
+                    className={`inline-block mt-6 px-6 py-3 rounded-full font-bold text-sm touch-manipulation transition-colors ${isSharing ? 'bg-gray-100 text-gray-600' : 'bg-green-600 text-white'}`}
+                >
+                    {isSharing ? 'Turn Off (Dignity Toggle)' : 'I am Safe (Turn On)'}
+                </button>
             </div>
 
-            {/* Daily Actions Grid */}
             <div className="grid grid-cols-2 gap-4">
                  <Link href="/senior/meal-log" className="block">
-                    <button className="w-full bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-orange-50 transition h-full">
+                    <button className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-orange-50 transition h-full">
                         <span className="text-4xl">🍚</span>
                         <span className="font-bold text-gray-800 text-lg">I Ate</span>
                     </button>
                 </Link>
 
                 <Link href="/senior/med-log" className="block">
-                    <button className="w-full bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-blue-50 transition h-full">
+                    <button className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-blue-50 transition h-full">
                         <span className="text-4xl">💊</span>
                         <span className="font-bold text-gray-800 text-lg">My Meds</span>
                     </button>
                 </Link>
 
                  <Link href="/care-quest" className="block">
-                    <button className="w-full bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-green-50 transition h-full">
+                    <button className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-green-50 transition h-full">
                         <span className="text-4xl">📅</span>
                         <span className="font-bold text-gray-800 text-lg">Calendar</span>
                     </button>
                 </Link>
 
                 <Link href="/senior/leaderboard" className="block">
-                    <button className="w-full bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-yellow-50 transition h-full">
+                    <button className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center gap-3 hover:bg-yellow-50 transition h-full">
                         <span className="text-4xl">🏆</span>
                         <span className="font-bold text-gray-800 text-lg">Leaderboard</span>
                     </button>

@@ -33,8 +33,9 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
     const navItems = [
         { name: "Home", href: "/dashboard", icon: <HomeIcon /> },
         { name: "Care Quest", href: "/care-quest", icon: <CalendarIcon /> },
-        { name: "Services", action: () => setIsServicesOpen(true), icon: <GridIcon /> },
+        { name: "Services", action: () => setIsServicesOpen(true), isActive: isServicesOpen, icon: <GridIcon /> },
         { name: "Profile", href: "/profile", icon: <UserIcon /> },
+        { name: "Chat", action: toggleChat, isActive: isChatOpen, icon: <ChatIcon />, mobileOnly: true, activeClass: "text-gray-900 bg-gray-100" },
     ];
 
     const services = [
@@ -78,8 +79,12 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
 
                 {/* Nav Links */}
                 <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-                    {navItems.map((item, idx) => (
-                        item.href ? (
+                    {navItems.map((item, idx) => {
+                        // Hide mobile-only items (Chat) on desktop sidebar
+                        // @ts-ignore
+                        if (item.mobileOnly) return null;
+                        
+                        return item.href ? (
                             <Link 
                                 key={idx} 
                                 href={item.href}
@@ -98,7 +103,7 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                                 {isSidebarOpen && <span className="font-bold text-sm whitespace-nowrap">{item.name}</span>}
                             </button>
                         )
-                    ))}
+                    })}
                 </nav>
 
                 {/* User Profile (Collapsed) */}
@@ -131,12 +136,17 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
 
             {/* --- MOBILE BOTTOM NAV --- */}
             <nav className="md:hidden fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200 p-2 z-50 flex justify-around items-center">
-                 {navItems.map((item, idx) => (
-                     item.href ? (
+                 {navItems.map((item, idx) => {
+                     // @ts-ignore
+                     const isActive = item.href ? pathname === item.href : item.isActive;
+                     // @ts-ignore
+                     const activeStyle = item.activeClass || 'text-primary bg-primary/10';
+
+                     return item.href ? (
                         <Link 
                             key={idx} 
                             href={item.href}
-                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${pathname === item.href ? 'text-primary bg-primary/10' : 'text-gray-400'}`}
+                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${isActive ? activeStyle : 'text-gray-400'}`}
                         >
                             <span className="w-6 h-6">{item.icon}</span>
                             <span className="text-[10px] font-bold">{item.name}</span>
@@ -145,22 +155,13 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                         <button 
                             key={idx} 
                             onClick={item.action}
-                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${isServicesOpen ? 'text-primary bg-primary/10' : 'text-gray-400'}`}
+                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${isActive ? activeStyle : 'text-gray-400'}`}
                         >
                             <span className="w-6 h-6">{item.icon}</span>
                             <span className="text-[10px] font-bold">{item.name}</span>
                         </button>
-                     )
-                ))}
-                
-                {/* Chat Bot Toggle (Mobile Only) */}
-                <button 
-                    onClick={toggleChat}
-                    className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${isChatOpen ? 'text-primary bg-primary/10' : 'text-gray-400'}`}
-                >
-                    <span className="w-6 h-6 text-xl">🐶</span>
-                    <span className="text-[10px] font-bold">Chat</span>
-                </button>
+                     );
+                })}
             </nav>
 
             {/* --- SERVICES DRAWER (APP DRAWER STYLE) --- */}
@@ -268,4 +269,8 @@ function XIcon() {
 }
 function SearchIcon({ className }: { className?: string }) {
     return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
+}
+
+function ChatIcon() {
+    return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
 }
